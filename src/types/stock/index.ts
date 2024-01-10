@@ -1,1 +1,1 @@
-export * from "./stock.type";
+export * from './stock.type';

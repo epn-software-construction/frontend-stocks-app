@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Stock } from "../../types/stock/stock.type";
+import React, { useState } from 'react';
+import { Stock } from '../../types/stock/stock.type';
 
 export default function StockList({ stocks }: { stocks: Stock[] }) {
   const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
@@ -32,12 +32,12 @@ export default function StockList({ stocks }: { stocks: Stock[] }) {
             <tr key={stock.id}>
               <td className="py-2 px-4 border-b">{stock.symbol}</td>
               <td className="py-2 px-4 border-b">${stock.price.toFixed(2)}</td>
-              <td className="py-2 px-4 border-b">{stock.change["1h"]}</td>
+              <td className="py-2 px-4 border-b">{stock.change['1h']}</td>
               <td className="py-2 px-4 border-b">{stock.marketCap}</td>
               <td className="py-2 px-4 border-b">
                 <button
                   onClick={(e) => {
-                    console.log("buying stock", stock);
+                    console.log('buying stock', stock);
                     handleBuyStock(stock);
                   }}
                   className="bg-blue-500 text-white px-2 py-1 rounded"

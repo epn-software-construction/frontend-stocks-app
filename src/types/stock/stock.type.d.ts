@@ -4,9 +4,9 @@ export type Stock = {
   symbol: string;
   price: number;
   change: {
-    "1h": number;
-    "4h": number;
-    "24h": number;
+    '1h': number;
+    '4h': number;
+    '24h': number;
   };
   marketCap: number;
 };
