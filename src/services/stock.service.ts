@@ -1,4 +1,4 @@
-import { Stock } from '@/types/stock';
+import { type Stock } from '@/types/stock';
 
 const stocks: Stock[] = [
     {
@@ -51,6 +51,8 @@ const stocks: Stock[] = [
     },
 ];
 
-export const getStocks = async () => stocks;
+export const getStocks = async (): Promise<Stock[]> => stocks;
 
-export const buyShare = (share: Stock) => {};
+export const buyShare = (stock: Stock): Stock => {
+    return stock;
+};
