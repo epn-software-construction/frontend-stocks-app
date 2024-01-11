@@ -1,4 +1,4 @@
-export type Stock = {
+export interface Stock {
     id: number;
     name: string;
     symbol: string;
@@ -9,4 +9,4 @@ export type Stock = {
         '24h': number;
     };
     marketCap: number;
-};
+}

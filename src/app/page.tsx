@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { StockList } from '@/components/stock';
 import { getStocks } from '@/services/stock.service';
 

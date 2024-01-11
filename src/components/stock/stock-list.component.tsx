@@ -1,17 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Stock } from '../../types/stock/stock.type';
+import React from 'react';
+import { type Stock } from '@/types/stock';
 
-export default function StockList({ stocks }: { stocks: Stock[] }) {
-    const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
-
-    const handleBuyStock = (stock: Stock) => {
-        setSelectedStock(stock);
-    };
-
-    const handleCloseModal = () => {
-        setSelectedStock(null);
+export default function StockList({ stocks }: { stocks: Stock[] }): JSX.Element {
+    const handleBuyStock = (stock: Stock): void => {
+        console.log('buying stock', stock);
     };
 
     return (
