@@ -8,6 +8,7 @@ export interface Stock {
 export interface StockPurchase {
     id: number;
     stockSymbol: string;
+    stockName: string;
     date: string;
     unitPrice: number;
     amount: number;
@@ -15,6 +16,7 @@ export interface StockPurchase {
 }
 
 export interface RequestStockPurchase {
+    stockName: string;
     stockSymbol: string;
     unitPrice: number;
     amount: number;

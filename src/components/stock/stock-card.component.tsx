@@ -1,14 +1,19 @@
 'use client';
 import { buyStock } from '@/services/stock.service';
-import type { Stock, RequestStockPurchase } from '@/types/stock';
+import type { RequestStockPurchase, Stock } from '@/types/stock';
 import React, { useState } from 'react';
 
 export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
     const [quantity, setQuantity] = useState(0);
     const [total, setTotal] = useState(0);
 
-    const handleBuyStock = async (stock: Stock): Promise<void> => {
+    const handleBuyStock = async (): Promise<void> => {
+        if (quantity === 0) {
+            return;
+        }
+
         const stockPurchase: RequestStockPurchase = {
+            stockName: stock.name,
             stockSymbol: stock.symbol,
             amount: quantity,
             unitPrice: stock.price,
@@ -16,8 +21,9 @@ export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
         };
 
         await buyStock(stockPurchase);
-
-        console.log('bought stock', stockPurchase);
+        setQuantity(0);
+        setTotal(0);
+        alert('Compra realizada con éxito');
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -35,18 +41,19 @@ export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
     return (
         <tr className="text-center">
             <td className="py-2 px-4 border-b">{stock.symbol}</td>
+            <td className="py-2 px-4 border-b">{stock.name}</td>
             <td className="py-2 px-4 border-b">${stock.price.toFixed(2)}</td>
             <td className="py-2 px-4 border-b">
                 <input
                     type="number"
                     value={quantity}
                     onChange={handleChange}
-                    className="pl-3 w-20 border border-cyan-400 rounded"
+                    className="pl-3 w-20 border border-gray-400 rounded text-center"
                 />
             </td>
             <td className="py-2 px-4 border-b w-28">${total}</td>
             <td className="py-2 px-4 border-b">
-                <button onClick={() => handleBuyStock} className="bg-blue-500 text-white px-2 py-1 rounded">
+                <button onClick={handleBuyStock} className="bg-blue-500 text-white px-2 py-1 rounded">
                     Comprar
                 </button>
             </td>
