@@ -1,13 +1,8 @@
-'use client';
-
 import React from 'react';
 import { type Stock } from '@/types/stock';
+import StockCard from './stock-card.component';
 
 export default function StockList({ stocks }: { stocks: Stock[] }): JSX.Element {
-    const handleBuyStock = (stock: Stock): void => {
-        console.log('buying stock', stock);
-    };
-
     return (
         <div className="mt-4">
             <h2 className="text-2xl font-bold mb-4">Lista de Acciones Disponibles</h2>
@@ -16,30 +11,14 @@ export default function StockList({ stocks }: { stocks: Stock[] }): JSX.Element 
                     <tr>
                         <th className="py-2 px-4 border-b">Símbolo</th>
                         <th className="py-2 px-4 border-b">Precio</th>
-                        <th className="py-2 px-4 border-b">Cambio</th>
-                        <th className="py-2 px-4 border-b">Market Cap</th>
+                        <th className="py-2 px-4 border-b">Cantidad</th>
+                        <th className="py-2 px-4 border-b w-20">Total</th>
                         <th className="py-2 px-4 border-b">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
                     {stocks.map((stock: Stock) => (
-                        <tr key={stock.id}>
-                            <td className="py-2 px-4 border-b">{stock.symbol}</td>
-                            <td className="py-2 px-4 border-b">${stock.price.toFixed(2)}</td>
-                            <td className="py-2 px-4 border-b">{stock.change['1h']}</td>
-                            <td className="py-2 px-4 border-b">{stock.marketCap}</td>
-                            <td className="py-2 px-4 border-b">
-                                <button
-                                    onClick={(e) => {
-                                        console.log('buying stock', stock);
-                                        handleBuyStock(stock);
-                                    }}
-                                    className="bg-blue-500 text-white px-2 py-1 rounded"
-                                >
-                                    Comprar
-                                </button>
-                            </td>
-                        </tr>
+                        <StockCard stock={stock} key={`stock-card-${stock.id}`} />
                     ))}
                 </tbody>
             </table>
