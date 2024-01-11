@@ -3,10 +3,20 @@ export interface Stock {
     name: string;
     symbol: string;
     price: number;
-    change: {
-        '1h': number;
-        '4h': number;
-        '24h': number;
-    };
-    marketCap: number;
+}
+
+export interface StockPurchase {
+    id: number;
+    stockSymbol: string;
+    date: string;
+    unitPrice: number;
+    amount: number;
+    totalPrice: number;
+}
+
+export interface RequestStockPurchase {
+    stockSymbol: string;
+    unitPrice: number;
+    amount: number;
+    totalPrice: number;
 }

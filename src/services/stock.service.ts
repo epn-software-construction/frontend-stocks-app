@@ -1,4 +1,5 @@
-import { type Stock } from '@/types/stock';
+import { type StockPurchase, type Stock, type RequestStockPurchase } from '@/types/stock';
+import { config } from '@/config';
 
 const stocks: Stock[] = [
     {
@@ -6,53 +7,85 @@ const stocks: Stock[] = [
         name: 'Apple',
         symbol: 'AAPL',
         price: 150.5,
-        change: {
-            '1h': 1.2,
-            '4h': -0.5,
-            '24h': 3.0,
-        },
-        marketCap: 2300000000000, // Example market cap in dollars
     },
     {
         id: 2,
         name: 'Netflix',
         symbol: 'NFLX',
         price: 550.25,
-        change: {
-            '1h': 0.25,
-            '4h': -1.5,
-            '24h': 1.4,
-        },
-        marketCap: 270000000000, // Example market cap in dollars
     },
     {
         id: 3,
         name: 'Google',
         symbol: 'GOOGL',
         price: 2800.75,
-        change: {
-            '1h': -0.8,
-            '4h': 2.0,
-            '24h': 5.6,
-        },
-        marketCap: 1900000000000, // Example market cap in dollars
     },
     {
         id: 4,
         name: 'Microsoft',
         symbol: 'MSFT',
         price: 320.0,
-        change: {
-            '1h': 0.5,
-            '4h': 1.3,
-            '24h': 2.7,
-        },
-        marketCap: 2100000000000, // Example market cap in dollars
     },
 ];
 
-export const getStocks = async (): Promise<Stock[]> => stocks;
+const stockPurchases: StockPurchase[] = [
+    {
+        id: 1,
+        stockSymbol: 'AAPL',
+        date: '06-01-24',
+        unitPrice: 150.5,
+        totalPrice: 1505,
+        amount: 10,
+    },
+    {
+        id: 2,
+        stockSymbol: 'NFLX',
+        date: '06-01-24',
+        unitPrice: 550.25,
+        totalPrice: 550.25,
+        amount: 1,
+    },
+    {
+        id: 3,
+        stockSymbol: 'GOOGL',
+        date: '06-01-24',
+        unitPrice: 2800.75,
+        totalPrice: 2800.75,
+        amount: 1,
+    },
+    {
+        id: 4,
+        stockSymbol: 'MSFT',
+        date: '06-01-24',
+        unitPrice: 320.0,
+        totalPrice: 3200,
+        amount: 10,
+    },
+];
 
-export const buyShare = (stock: Stock): Stock => {
-    return stock;
+export const getStocks = async (): Promise<Stock[]> => {
+    const response = await fetch(`${config.API_URL}/stocks`);
+    const data = await response.json();
+    console.log(data);
+    return stocks;
+};
+
+export const getPurchases = async (): Promise<StockPurchase[]> => {
+    // const response = await fetch(`${config.API_URL}/user-stocks`);
+
+    // const data = await response.json();
+    // console.log(data);
+    return stockPurchases;
+};
+
+export const buyStock = async (stockPurchase: RequestStockPurchase): Promise<RequestStockPurchase> => {
+    // const response = await fetch(`${config.API_URL}/user-stocks`, {
+    //     method: 'POST',
+    //     body: JSON.stringify(stockPurchase),
+    // });
+
+    // const data = await response.json();
+    // console.log(data);
+
+    return stockPurchase;
 };
