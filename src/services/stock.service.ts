@@ -17,6 +17,19 @@ export const getPurchases = async (): Promise<StockPurchase[]> => {
     return data;
 };
 
+export const getChange = async (stockSymbol: string, priceToCalculate: number): Promise<number> => {
+    const data = await getStocks();
+    const stock = data.find((stock) => stock.symbol === stockSymbol);
+
+    if (!stock) {
+        return 0;
+    }
+
+    const change = stock.price - priceToCalculate;
+    const percentage = (change / priceToCalculate) * 100;
+    return percentage;
+};
+
 export const buyStock = async (stockPurchase: RequestStockPurchase): Promise<RequestStockPurchase> => {
     const response = await fetch(`${config.API_URL}/user-stocks`, {
         method: 'POST',

@@ -23,12 +23,11 @@ export default function StockList(): JSX.Element {
             <table className="min-w-full bg-white border rounded">
                 <thead>
                     <tr>
-                        <th className="py-2 px-4 border-b">Símbolo</th>
                         <th className="py-2 px-4 border-b">Nombre</th>
                         <th className="py-2 px-4 border-b">Precio</th>
                         <th className="py-2 px-4 border-b">Cantidad</th>
                         <th className="py-2 px-4 border-b w-20">Total</th>
-                        <th className="py-2 px-4 border-b">Acción</th>
+                        <th className="py-2 px-4 border-b">Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
