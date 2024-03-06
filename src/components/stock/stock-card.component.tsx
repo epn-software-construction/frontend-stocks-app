@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
     const [quantity, setQuantity] = useState(0);
     const [total, setTotal] = useState(0);
+    const [date, setDate] = useState('');
 
     const handleBuyStock = async (): Promise<void> => {
         if (quantity === 0) {
@@ -14,8 +15,8 @@ export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
 
         const stockPurchase: RequestStockPurchase = {
             stockName: stock.name,
-            stockSymbol: stock.symbol,
             amount: quantity,
+            date,
             unitPrice: stock.price,
             totalPrice: total,
         };
@@ -23,6 +24,7 @@ export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
         await buyStock(stockPurchase);
         setQuantity(0);
         setTotal(0);
+        setDate('');
         alert('Compra realizada con éxito');
     };
 
@@ -38,9 +40,17 @@ export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
         setTotal(stock.price * newQuantity);
     };
 
+    const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        if (e.target.value === '') {
+            setDate('');
+            return;
+        }
+
+        setDate(e.target.value);
+    };
+
     return (
         <tr className="text-center">
-            <td className="py-2 px-4 border-b">{stock.symbol}</td>
             <td className="py-2 px-4 border-b">{stock.name}</td>
             <td className="py-2 px-4 border-b">${stock.price.toFixed(2)}</td>
             <td className="py-2 px-4 border-b">
@@ -51,10 +61,18 @@ export default function StockCard({ stock }: { stock: Stock }): JSX.Element {
                     className="pl-3 w-20 border border-gray-400 rounded text-center"
                 />
             </td>
-            <td className="py-2 px-4 border-b w-28">${total}</td>
+            <td className="py-2 px-4 border-b w-28">${total.toFixed(2)}</td>
+            <td className="py-2 px-4 border-b w-42">
+                <input
+                    type="string"
+                    value={date}
+                    onChange={handleDateChange}
+                    className="pl-3 border border-gray-400 rounded text-center"
+                />
+            </td>
             <td className="py-2 px-4 border-b">
                 <button onClick={handleBuyStock} className="bg-blue-500 text-white px-2 py-1 rounded">
-                    Comprar
+                    Registrar
                 </button>
             </td>
         </tr>

@@ -16,8 +16,8 @@ export interface StockPurchase {
 }
 
 export interface RequestStockPurchase {
+    date: string;
     stockName: string;
-    stockSymbol: string;
     unitPrice: number;
     amount: number;
     totalPrice: number;
